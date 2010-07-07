@@ -1,0 +1,31 @@
+﻿<div id="site">
+	<div id="header">
+		<h1>Cookies</h1>
+		<h5 id="version"></h5>
+	</div>
+	<div id="corps">
+		<p>Ce script vous permet de créer des cookies simplement grâce à la <strong>Prototype.js</strong>, donc celui-ci est <span class="important"><strong>indispensable</strong></span>.</p>
+		
+		<h3>Créer un cookie</h3>
+		<pre class="brush: js">
+			var mail = new Cookies();
+			...
+			mail.set('mailSend'x, 'yes', 1);
+		</pre>
+		<p>Le code ci-dessus crée un cookie ayant pour clé "mailSend", pour valeur "yes" et pour durée de validité 1 jour.</p>
+		
+		<h3>Récupérer la valeur d'un cookie</h3>
+		<pre class="brush: js">
+			var value = mail.get('mailIsSend');
+		</pre>
+		<p>Le code ci-dessus récupère la valeur du cookie créé ci-dessus. La fonction get renvoie false si le cookie recherché n'existe pas, il est donc très facile de tester la présence du cookie.</p>
+		
+		<h3>Supprimer un ou plusieurs cookies</h3>
+		<pre class="brush: js">
+			mail.clear('mailSend');
+			mail.clearAll();
+		</pre>
+		<p>La première ligne du code ci-dessus supprime le cookie ayant pour clé "mailsend".</p>
+		<p>La deuxième ligne du code ci-dessus supprime tous les cookies.</p>
+	</div>
+</div>

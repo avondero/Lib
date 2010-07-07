@@ -1,0 +1,72 @@
+﻿<div id="site">
+	<div id="header">
+		<h1>Onglet en javascript</h1>
+		<h5 id="version"></h5>
+	</div>
+	<div id="corps" style="height: 717px;">
+	<p>Ce script vous permet de construire des onglets simplement. Il est basé sur <strong>Prototype.js</strong>, donc celui-ci est <span class="important"><strong>indispensable</strong></span>. Il vous suffit de créer sur votre page HTML une liste et autant de panel qu'il y a d'élément dans la liste.</p>
+	<pre class="brush: xml">
+		&lt;ul id=&quot;onglets&quot;&gt;
+			&lt;li idPanel=&quot;un&quot;&gt; Un &lt;/li&gt;
+			&lt;li idPanel=&quot;deux&quot;&gt; Deux &lt;/li&gt;
+			&lt;li idPanel=&quot;trois&quot;&gt; Trois &lt;/li&gt;
+			&lt;li idPanel=&quot;quatre&quot;&gt; Quatre &lt;/li&gt;
+			&lt;li idPanel=&quot;cinq&quot;&gt; Cinq &lt;/li&gt;
+		&lt;/ul&gt;
+		
+		&lt;div id=&quot;un&quot;&gt; Onglet 1 &lt;/div&gt;
+		&lt;div id=&quot;deux&quot;&gt; Onglet 2 &lt;/div&gt;
+		&lt;div id=&quot;trois&quot;&gt;
+			&lt;img width=&quot;240&quot; src=&quot;../images/chat.jpg&quot;/&gt;
+		&lt;/div&gt;
+		&lt;div id=&quot;quatre&quot;&gt; Onglet 4 &lt;/div&gt;
+		&lt;div id=&quot;cinq&quot;&gt; Onglet 5 &lt;/div&gt;
+
+	</pre>
+	
+	<pre class="brush: js">
+		window.onload = function()
+		{	
+			...
+			new Tabs('onglets');
+			...
+		}
+	</pre>
+	
+	<p>Chaque élément de la liste doit avoir un attribut 'idPanel' qui correspond à l'id du panel qui lui est associè. De plus chaque élément de la liste a une classe suivant son état : 'ongletActif' ou 'ongletPassif', et chaque panel a une classe 'panelTab'.</p>
+	
+		<ul id="exampleTabs">
+			<li idPanel="un">
+				Un
+			</li>
+			<li idPanel="deux">
+				Deux
+			</li>
+			<li idPanel="trois">
+				Trois
+			</li>
+			<li idPanel="quatre">
+				Quatre
+			</li>
+			<li idPanel="cinq">
+				Cinq
+			</li>
+		</ul>
+		<div id="un">
+			Onglet 1
+		</div>
+		<div id="deux">
+			Onglet 2
+		</div>
+		<div id="trois">
+			<img width="240" src="../images/chat.jpg"/>
+		</div>
+		<div id="quatre">
+			Onglet 4
+		</div>
+		<div id="cinq">
+			Onglet 5
+		</div>
+		
+	</div>
+</div>

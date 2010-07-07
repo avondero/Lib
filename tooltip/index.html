@@ -1,0 +1,226 @@
+﻿<div id="site">
+	<div id="header">
+		<h1>Tooltip</h1>
+		<h5 id="version"></h5>
+	</div>
+	<div id="corps">
+		<p>
+			Ce script permet de configurer un ou plusieurs tooltips sur n'importe quel élément de votre page HTML, et ceci de façon simple. Il est basé sur <strong>Prototype.js (= 1.6)</strong>, donc celui-ci est <span class="important"><strong>indispensable</strong></span>. Tous les scripts suivant dans la page sont exécuter dans la fonction 'window.onload'
+		</p>
+		<pre class="brush: js">
+			window.onload = function()
+			{
+				...
+				new Tooltip('id', options);
+				...
+			}
+		</pre>
+		<br/>
+		<h3>Tooltip simple (sans option)</h3>
+		<pre class="brush: js">
+			new Tooltip('demoSimple',{
+				content: "Démo simple"
+				});
+			...
+		</pre>
+		<pre class="brush: xml">	
+			&lt;span id=&quot;demoSimple&quot;&gt;Démo&lt;/span&gt;
+		</pre>
+		<p>
+			Le code ci-dessus vous permet de construire un tooltip simple apparaissant en bas à gauche de l'objet survolé.<span class="spanLink" id="demoSimple">Démo</span>
+		</p>
+		<h3>Tooltip avec id et class</h3>
+		<pre class="brush: css">
+			#tooltipCSS
+			{
+				color: #00FFFF;
+			}
+
+			.tooltipCSSClass
+			{
+				background-color: #0000FF;
+			}
+
+		</pre>
+		<pre class="brush: js">
+			var content = "Lorem ipsum dolor [...] interdum auctor venenatis.";
+
+			new Tooltip('demoCSS',{
+				content: content,
+				idTooltip: 'tooltipCSS',
+				nameClass: 'tooltipCSSClass'
+				});
+			...
+		</pre>
+		<pre class="brush: xml">	
+			&lt;span id=&quot;demoCSS&quot;&gt;tooltip&lt;/span&gt;
+		</pre>
+		<p>
+			Un id et une class peuvent être ajouter au <span class="spanLink" id="demoCSS">tooltip</span>
+			pour lui attribuer un style personnalisé.
+		</p>
+		<h3>Tooltip avec transparence et largeur maximum</h3>
+		<pre class="brush: js">
+			var content = "Lorem ipsum dolor [...] interdum auctor venenatis.";
+
+			...
+			
+			new Tooltip('demoOpacite',{
+				width: 200,
+				content: content,
+				opacity: .5
+				});
+			new Tooltip('demoTailleMaxModif',{
+				content: content,
+				maxWidth: 400
+				});
+			...
+		</pre>
+		<pre class="brush: xml">	
+			&lt;span id=&quot;demoOpacite&quot;&gt;message&lt;/span&gt;
+			&lt;span id=&quot;demoTailleMaxModif&quot;&gt;bulle&lt;/span&gt;
+		</pre>
+		<p>
+			Cette fois ci la première ligne du code précédent vous permet de changer l'opacité du <span class="spanLink" id="demoOpacite">message</span>. Tandis que la deuxième vous permet de modifier la largeur maximum de la <span class="spanLink" id="demoTailleMaxModif">bulle</span>
+			qui est par défaut de 200px.
+		</p>
+		<h3>Tooltip ancré à différent endroit d'un élément</h3>
+		<pre class="brush: js">
+			tooltipHook = new Tooltip('demoHook',{
+				content: "Démo hook",
+				hook: {
+					target: 'bottomLeft',
+					tip: 'outside'
+					}
+				});
+		</pre>
+		<pre class="brush: xml">
+			&lt;select id=&quot;selectHookTarget&quot; 
+				onchange=&quot;tooltipHook.setHook({target: $F(this)});&quot; &gt;...&lt;/select&gt;
+			&lt;select id=&quot;selectHookTip&quot; 
+				onchange=&quot;tooltipHook.setHook({tip: $F(this)});&quot;&gt;...&lt;/select&gt;
+			
+			&lt;img id=&quot;demoHook&quot; src=&quot;../images/chat.jpg&quot;/&gt;
+		</pre>
+		<p>L'exemple ci-dessous parle de lui-même, vous avez 18 choix de position pour votre tooltip.</p>
+		<div id="testHook">
+			<select id="selectHookTarget" onchange="scriptLib.GLOBALS.tooltipHook.setHook({target: $F(this)});">
+				<option value="bottomMid">bottomMid</option>
+				<option value="topMid">topMid</option>
+				<option value="leftMid">leftMid</option>
+				<option value="rightMid">rightMid</option>
+				<option value="rightUp">rightUp</option>
+				<option value="leftUp">leftUp</option>
+				<option value="bottomLeft" selected="selected">bottomLeft</option>
+				<option value="bottomRight">bottomRight</option>
+				<option value="center">center</option>
+			</select>
+			<select id="selectHookTip" onchange="scriptLib.GLOBALS.tooltipHook.setHook({tip: $F(this)});">
+				<option value="outside">outside</option>
+				<option value="inside">inside</option>
+			</select>
+			<br/>
+			<img id="demoHook" src="../images/chat.jpg"/>
+		</div><h3>Activation/désactivation du tooltip</h3>
+		<pre class="brush: js">
+			tooltipAutoStart = new Tooltip('demoAutoStart',{
+				content: "Démo simple",
+				autoStart: false
+				});
+		</pre>
+		<pre class="brush: xml">
+			&lt;span id=&quot;demoAutoStart&quot; &gt;tooltip&lt;/span&gt;
+			
+			&lt;input type=&quot;button&quot; value=&quot;Activer/Désactiver&quot; 
+				onclick=&quot;tooltipAutoStart.toggleTooltip()&quot;/&gt;
+		</pre>
+		<p>
+			Cliquer sur le bouton ci-dessus pour activer/désactiver le <span class="spanLink" id="demoAutoStart">tooltip</span>. Le fonctions enable() et disable() existe.
+		</p>
+		<div id="testActivation">
+			<input type="button" value="Activer/Désactiver" onclick="scriptLib.GLOBALS.tooltipAutoStart.toggleTooltip()"/>
+		</div><h3>Tooltip qui suit le pointeur de souris</h3>
+		<pre class="brush: js">
+			new Tooltip('demoFollow',{
+				content: "Démo simple",
+				mouseFollow: true
+				});
+				
+			new Tooltip('demoFollowLeft',{
+				content: "Démo simple",
+				mouseFollow: true,
+				mouseFollowLeft: true
+				});
+		</pre>
+		<p>L'exemple ci-dessous parle de lui-même!</p>
+		<table>
+			<tr>
+				<td><img id="demoFollow" width="240" src="../images/chat.jpg"/></td><td>si vous préférez à gauche ==></td>
+				<td><img id="demoFollowLeft" width="240" src="../images/chat.jpg"/></td>
+			</tr>
+		</table><h3>Tooltip définit avec un objet externe</h3>
+		<pre class="brush: js">
+			new Tooltip('demoExtern',{
+				tooltipExtern: true,
+				idTooltip: 'tool',
+				maxWidth: 1000,
+				hook: {target: 'leftUp'}
+				});
+				
+			new Tooltip('demoExtern2',{
+				tooltipExtern: true,
+				idTooltip: 'tool2',
+				hook: {target: 'leftUp'}
+				});
+				
+			$('tool').setStyle({ position: 'absolute', display: 'none'});
+			$('tool2').setStyle({ position: 'absolute', display: 'none'});
+		</pre>
+		<pre class="brush: xhtml">
+		
+			&lt;iframe id=&quot;tool&quot; src =&quot;http://www.google.fr&quot; width=&quot;500px&quot; height=&quot;300&quot; &gt;
+				&lt;p&gt;Your browser does not support iframes.&lt;/p&gt;
+			&lt;/iframe&gt;
+			
+			&lt;table id=&quot;tool2&quot; style=&quot;border-collapse: collapse;background-color: #FFF;&quot; &gt;
+				&lt;tr&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+					&lt;td style=&quot;border: 1px solid black;&quot;&gt; ... &lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/table&gt;
+			
+		</pre>
+		<p>
+			Ce <span class="spanLink" id="demoExtern2">tooltip</span>
+			est défini de façon externe.
+		</p>
+		<table id="tool2" style="border-collapse: collapse; background-color: #FFF;">
+			<tr>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+			</tr>
+			<tr>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+			</tr>
+			<tr>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+				<td style="border: 1px solid black;">Lorem ipsum dolor sit amet, </td>
+			</tr>
+		</table>
+	</div>
+</div>
